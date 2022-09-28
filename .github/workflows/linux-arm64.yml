@@ -35,10 +35,16 @@ jobs:
       - name: Extract build files from Docker instance
         run: |
           docker create -ti --name scrcpy-linux-arm-tmp scrcpy-linux-arm bash
-          docker cp scrcpy-linux-arm-tmp:/scrcpy/x/app/scrcpy .
+          docker cp scrcpy-linux-arm-tmp:/scrcpy/x/app .
+          docker cp scrcpy-linux-arm-tmp:/scrcpy-server .
 
       - uses: actions/upload-artifact@v2
         with:
-          name: artifacts_linux_arm_lib
-          path: scrcpy
+          name: apps
+          path: app
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: servers
+          path: scrcpy-server
           
